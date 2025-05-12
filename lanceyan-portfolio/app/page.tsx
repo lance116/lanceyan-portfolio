@@ -7,6 +7,15 @@ import usePageTransitions from "./hooks/usePageTransitions";
 export default function Home() {
   // Use our custom hook to handle page transitions
   usePageTransitions();
+    // Helper function to determine if logo needs white background
+  const needsWhiteBg = (label: string) => {
+    return label === "HTML" || label === "CSS";
+  };
+  
+  // Helper function to determine if logo needs circular white background
+  const needsCircularWhiteBg = (label: string) => {
+    return label === "Next.js";
+  };
   
   useEffect(() => {
     // Snowflake background effect
@@ -120,12 +129,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Contacts Section */}
-        <section
+        {/* Contacts Section */}        <section
           className="w-full mt-0.5 mb-8 px-4 sm:px-8 section-hidden"
           id="contact-section"
-        >
-          <h2 className="text-2xl font-semibold mb-4 text-center sm:text-left">Contact</h2>
+        >          <h2 className="text-2xl font-semibold mb-4 text-center sm:text-left relative inline-block">
+            Contact
+            <span className="absolute bottom-0 left-0 w-full h-1.5 bg-blue-500 rounded-full" style={{ transform: 'translateY(4px)' }}></span>
+          </h2>
           <div className="flex flex-col sm:flex-row gap-5 justify-center sm:justify-start items-center sm:items-baseline">
             <a href="mailto:lance.yan.business@gmail.com" className="text-base text-blue-600 hover:underline flex items-center gap-2" target="_blank" rel="noopener noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 018 0zm0 0v4a4 4 0 01-8 0v-4" /></svg>
@@ -143,72 +153,63 @@ export default function Home() {
         </section>
         {/* Transition logic has been moved to a custom hook */}
 
-        {/* Skills Section */}
-        <section
+        {/* Skills Section */}        <section
           className="w-full mt-1 section-hidden px-4 sm:px-8"
           id="skills-section"
-        >
-          <h2 className="text-2xl font-semibold mb-4 text-center sm:text-left">Skills</h2>
-          {/* Languages Row */}
-          <div className="mb-6">
+        >          <h2 className="text-2xl font-semibold mb-4 text-center sm:text-left relative inline-block">
+            Skills
+            <span className="absolute bottom-0 left-0 w-full h-1.5 bg-red-500 rounded-full" style={{ transform: 'translateY(4px)' }}></span>
+          </h2>
+          {/* Languages Row */}          <div className="mb-6">
             <h3 className="text-lg font-medium mb-2 text-center sm:text-left">Languages</h3>
-            <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
+            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
               {[
                 { src: "/python.png", label: "Python", url: "https://www.python.org/" },
                 { src: "/java.png", label: "Java", url: "https://www.java.com/", bigger: true },
                 { src: "/typescript.png", label: "TypeScript", url: "https://www.typescriptlang.org/" },
                 { src: "/javascript.png", label: "JavaScript", url: "https://www.javascript.com/" },
-              ].map(({ src, label, url, bigger }) => (
-                label === "CSS" || label === "HTML" ? (
-                  <div key={label} className="flex flex-col items-center min-w-[96px]">
-                    <div className="flex flex-col items-center justify-end h-[64px]">
-                      <Image src={src} alt={label} width={label === "HTML" ? 56 : 40} height={label === "HTML" ? 56 : 40} className="mb-0" />
-                    </div>
-                    <span className="text-sm text-center mt-0 min-h-[20px]">{label}</span>
-                  </div>
-                ) : (
+                { src: "/css.png", label: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+                { src: "/html.png", label: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML", bigger: true, moveUp: true, htmlAdjust: true },
+              ].map(({ src, label, url, bigger, moveUp, htmlAdjust }) => (
+                (
                   <a
                     key={label}
                     href={url}
-                    className="flex flex-col items-center min-w-[96px] group"
+                    className="flex flex-col items-center min-w-[110px] group"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <div className="flex flex-col items-center justify-end h-[64px]">
-                      <Image
-                        src={src}
-                        alt={label}
-                        width={bigger ? 48 : 40}
-                        height={bigger ? 48 : 40}
-                        className={
-                          "mb-0 transition-transform duration-200 group-hover:scale-125" +
-                          (bigger ? "" : "")
-                        }
-                        style={bigger ? { marginLeft: "8px" } : undefined}
-                      />
+                      <div className={needsWhiteBg(label) ? "bg-white p-1 rounded-md" : ""}>
+                        <Image
+                          src={src}
+                          alt={label}
+                          width={label === "HTML" && htmlAdjust ? 45.6 : bigger ? 48 : 40}
+                          height={label === "HTML" && htmlAdjust ? 45.6 : bigger ? 48 : 40}
+                          className="mb-0 transition-transform duration-200 group-hover:scale-125"
+                          style={label === "HTML" && htmlAdjust ? { marginLeft: "3px" } : bigger ? { marginLeft: "8px" } : undefined}
+                        />
+                      </div>
                     </div>
-                    <span className="text-sm text-center mt-0 min-h-[20px]">{label}</span>
+                    <span className="text-sm text-center mt-2 min-h-[20px]">{label}</span>
                   </a>
                 )
               ))}
             </div>
           </div>
-          {/* Frameworks Row */}
-          <div>
+          {/* Frameworks Row */}          <div>
             <h3 className="text-lg font-medium mb-2 text-center sm:text-left">Frameworks & Libraries</h3>
-            <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
+            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
               {[
-                { src: "/react.png", label: "React", url: "https://react.dev/" },
-                { src: "/nextjs.png", label: "Next.js", url: "https://nextjs.org/" },
-                { src: "/tailwindcss.png", label: "Tailwind CSS", url: "https://tailwindcss.com/", moveUp: true, moveUpMore: true, moveUpMost: true },
-                { src: "/pytorch.png", label: "PyTorch", url: "https://pytorch.org/" },
-                { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/" },
-                { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/" },
-                { src: "/css.png", label: "CSS" },
-                { src: "/html.png", label: "HTML", bigger: true, moveUp: true },
+                { src: "/react.png", label: "React", url: "https://react.dev/", bigger: false },
+                { src: "/nextjs.png", label: "Next.js", url: "https://nextjs.org/", bigger: false },
+                { src: "/tailwindcss.png", label: "Tailwind CSS", url: "https://tailwindcss.com/", moveUp: true, moveUpMore: true, moveUpMost: true, bigger: false },
+                { src: "/pytorch.png", label: "PyTorch", url: "https://pytorch.org/", bigger: false },
+                { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/", bigger: false },
+                { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/", bigger: false },
               ].map(({ src, label, url, moveUp, bigger, moveUpMore, moveUpMost }) => (
                 label === "CSS" || label === "HTML" ? (
-                  <div key={label} className="flex flex-col items-center min-w-[96px]">
+                  <div key={label} className="flex flex-col items-center min-w-[110px]">
                     <div className="flex flex-col items-center justify-end h-[80px]">
                       <Image
                         src={src}
@@ -218,28 +219,35 @@ export default function Home() {
                         className="mb-1"
                         style={moveUp ? { marginTop: '-12px' } : undefined}
                       />
-                    </div>
-                    <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
+                    </div>                    <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
                   </div>
                 ) : (
                   <a
                     key={label}
                     href={url}
-                    className="flex flex-col items-center min-w-[96px] group"
+                    className="flex flex-col items-center min-w-[110px] group"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    <div className="flex flex-col items-center justify-end h-[80px]">
-                      <Image
-                        src={src}
-                        alt={label}
-                        width={label === "Tailwind CSS" && moveUp ? 48 : 48}
-                        height={label === "Tailwind CSS" && moveUp ? 48 : 48}
-                        className="mb-1 transition-transform duration-200 group-hover:scale-125"
-                        style={label === "Tailwind CSS" && moveUpMost ? { marginTop: '-32px' } : label === "Tailwind CSS" && moveUpMore ? { marginTop: '-24px' } : label === "Tailwind CSS" && moveUp ? { marginTop: '-12px' } : undefined}
-                      />
+                  >                    <div className="flex flex-col items-center justify-end h-[80px]">                      <div className={
+                        needsWhiteBg(label) ? "bg-white p-1 rounded-md" : 
+                        needsCircularWhiteBg(label) ? "bg-white p-1 rounded-full flex items-center justify-center" : 
+                        ""
+                      } style={needsCircularWhiteBg(label) ? { width: "44px", height: "44px", marginTop: "5px" } : undefined}>                        <Image
+                          src={src}
+                          alt={label}
+                          width={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : 48}
+                          height={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : 48}
+                          className="mb-1 transition-transform duration-200 group-hover:scale-125"                          style={
+                            label === "Next.js" ? { marginTop: '3.5px' } :
+                            label === "Tailwind CSS" && moveUpMost ? { marginTop: '-32px' } : 
+                            label === "Tailwind CSS" && moveUpMore ? { marginTop: '-24px' } : 
+                            label === "Tailwind CSS" && moveUp ? { marginTop: '-12px' } : 
+                            undefined
+                          }
+                        />
+                      </div>
                     </div>
-                    <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
+                    <span className="text-sm text-center mt-2 min-h-[20px]">{label}</span>
                   </a>
                 )
               ))}
