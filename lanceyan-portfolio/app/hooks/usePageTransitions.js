@@ -1,0 +1,145 @@
+"use client";
+
+import { useEffect } from 'react';
+
+/**
+ * Custom hook to handle section transitions
+ * Based on scroll position: hidden at top, visible when scrolled
+ */
+export default function usePageTransitions() {
+  useEffect(() => {
+    // Get the sections we need to animate
+    const getSections = () => {
+      const skillsSection = document.getElementById('skills-section');
+      const contactSection = document.getElementById('contact-section');
+      return [skillsSection, contactSection].filter(Boolean);
+    };
+    
+    /**
+     * Updates section visibility based on scroll position
+     * - At top (scrollY === 0): sections are hidden
+     * - When scrolled (scrollY > 0): sections are visible
+     */
+    const updateSectionsByScrollPosition = () => {
+      const sections = getSections();
+      if (sections.length === 0) return;
+      
+      const isAtTop = window.scrollY === 0;
+      
+      sections.forEach(section => {
+        // Remove temporary no-transition class if it exists
+        section.classList.remove('no-transition');
+        
+        if (isAtTop) {
+          // At the top, hide the sections
+          if (!section.classList.contains('section-hidden')) {
+            section.classList.remove('section-visible');
+            section.classList.add('section-hidden');
+          }
+        } else {
+          // When scrolled, show the sections
+          if (!section.classList.contains('section-visible')) {
+            section.classList.remove('section-hidden');
+            section.classList.add('section-visible');
+          }
+        }
+      });
+    };
+    
+    /**
+     * Sets initial state without animations when page loads or returns
+     */
+    const initializeSections = () => {
+      const sections = getSections();
+      if (sections.length === 0) return;
+      
+      const isAtTop = window.scrollY === 0;
+      
+      // Apply the state without animation first
+      sections.forEach(section => {
+        section.classList.add('no-transition');
+        
+        if (isAtTop) {
+          section.classList.remove('section-visible');
+          section.classList.add('section-hidden');
+        } else {
+          section.classList.remove('section-hidden');
+          section.classList.add('section-visible');
+        }
+      });
+      
+      // Force reflow to make sure styles are applied
+      void document.body.offsetWidth;
+      
+      // Remove the no-transition class after a short delay
+      setTimeout(() => {
+        sections.forEach(section => {
+          section.classList.remove('no-transition');
+        });
+      }, 50);
+    };
+    
+    // Main scroll handler
+    const handleScroll = () => {
+      updateSectionsByScrollPosition();
+    };
+    
+    // Handler for page visibility changes
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        initializeSections();
+      }
+    };
+    
+    // Handler for navigation events
+    const handleNavigationEvents = () => {
+      initializeSections();
+    };
+    
+    // Set up event listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    window.addEventListener('pageshow', handleNavigationEvents);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Set up Next.js client-side navigation hooks
+    let originalPushState = null;
+    let originalReplaceState = null;
+    
+    if (typeof window !== 'undefined' && window.history) {
+      originalPushState = window.history.pushState;
+      window.history.pushState = function() {
+        originalPushState.apply(this, arguments);
+        handleNavigationEvents();
+      };
+      
+      originalReplaceState = window.history.replaceState;
+      window.history.replaceState = function() {
+        originalReplaceState.apply(this, arguments);
+        handleNavigationEvents();
+      };
+      
+      window.addEventListener('popstate', handleNavigationEvents);
+    }
+    
+    // Initialize sections on mount
+    initializeSections();
+    
+    // Clean up event listeners on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('pageshow', handleNavigationEvents);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      
+      if (window.history) {
+        if (originalPushState) window.history.pushState = originalPushState;
+        if (originalReplaceState) window.history.replaceState = originalReplaceState;
+      }
+      
+      window.removeEventListener('popstate', handleNavigationEvents);
+    };
+  }, []);
+  
+  return {};
+}

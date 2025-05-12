@@ -2,8 +2,12 @@
 // filepath: a:\Website\lanceyan-portfolio\app\page.tsx
 import Image from "next/image";
 import { useEffect } from "react";
+import usePageTransitions from "./hooks/usePageTransitions";
 
 export default function Home() {
+  // Use our custom hook to handle page transitions
+  usePageTransitions();
+  
   useEffect(() => {
     // Snowflake background effect
     const canvas = document.createElement('canvas');
@@ -137,6 +141,7 @@ export default function Home() {
             </a>
           </div>
         </section>
+        {/* Transition logic has been moved to a custom hook */}
 
         {/* Skills Section */}
         <section
@@ -147,7 +152,7 @@ export default function Home() {
           {/* Languages Row */}
           <div className="mb-6">
             <h3 className="text-lg font-medium mb-2 text-center sm:text-left">Languages</h3>
-            <div className="flex flex-wrap gap-8 justify-center sm:justify-start">
+            <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
               {[
                 { src: "/python.png", label: "Python", url: "https://www.python.org/" },
                 { src: "/java.png", label: "Java", url: "https://www.java.com/", bigger: true },
@@ -157,9 +162,9 @@ export default function Home() {
                 label === "CSS" || label === "HTML" ? (
                   <div key={label} className="flex flex-col items-center min-w-[96px]">
                     <div className="flex flex-col items-center justify-end h-[64px]">
-                      <Image src={src} alt={label} width={label === "HTML" ? 56 : 40} height={label === "HTML" ? 56 : 40} className="mb-1" />
+                      <Image src={src} alt={label} width={label === "HTML" ? 56 : 40} height={label === "HTML" ? 56 : 40} className="mb-0" />
                     </div>
-                    <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
+                    <span className="text-sm text-center mt-0 min-h-[20px]">{label}</span>
                   </div>
                 ) : (
                   <a
@@ -176,13 +181,13 @@ export default function Home() {
                         width={bigger ? 48 : 40}
                         height={bigger ? 48 : 40}
                         className={
-                          "mb-1 transition-transform duration-200 group-hover:scale-125" +
+                          "mb-0 transition-transform duration-200 group-hover:scale-125" +
                           (bigger ? "" : "")
                         }
                         style={bigger ? { marginLeft: "8px" } : undefined}
                       />
                     </div>
-                    <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
+                    <span className="text-sm text-center mt-0 min-h-[20px]">{label}</span>
                   </a>
                 )
               ))}
@@ -195,13 +200,13 @@ export default function Home() {
               {[
                 { src: "/react.png", label: "React", url: "https://react.dev/" },
                 { src: "/nextjs.png", label: "Next.js", url: "https://nextjs.org/" },
-                { src: "/tailwindcss.png", label: "Tailwind CSS", url: "https://tailwindcss.com/", moveUp: true, moveUpMore: true },
+                { src: "/tailwindcss.png", label: "Tailwind CSS", url: "https://tailwindcss.com/", moveUp: true, moveUpMore: true, moveUpMost: true },
                 { src: "/pytorch.png", label: "PyTorch", url: "https://pytorch.org/" },
                 { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/" },
                 { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/" },
                 { src: "/css.png", label: "CSS" },
                 { src: "/html.png", label: "HTML", bigger: true, moveUp: true },
-              ].map(({ src, label, url, moveUp, bigger, moveUpMore }) => (
+              ].map(({ src, label, url, moveUp, bigger, moveUpMore, moveUpMost }) => (
                 label === "CSS" || label === "HTML" ? (
                   <div key={label} className="flex flex-col items-center min-w-[96px]">
                     <div className="flex flex-col items-center justify-end h-[80px]">
@@ -231,7 +236,7 @@ export default function Home() {
                         width={label === "Tailwind CSS" && moveUp ? 48 : 48}
                         height={label === "Tailwind CSS" && moveUp ? 48 : 48}
                         className="mb-1 transition-transform duration-200 group-hover:scale-125"
-                        style={label === "Tailwind CSS" && moveUpMore ? { marginTop: '-24px' } : label === "Tailwind CSS" && moveUp ? { marginTop: '-12px' } : undefined}
+                        style={label === "Tailwind CSS" && moveUpMost ? { marginTop: '-32px' } : label === "Tailwind CSS" && moveUpMore ? { marginTop: '-24px' } : label === "Tailwind CSS" && moveUp ? { marginTop: '-12px' } : undefined}
                       />
                     </div>
                     <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
