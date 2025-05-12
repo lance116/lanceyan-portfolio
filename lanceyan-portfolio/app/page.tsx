@@ -20,30 +20,45 @@ export default function Home() {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-
-    function resize() {
+    function setCanvasSize() {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      // On mobile, use devicePixelRatio for crispness
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      // ctx is not available until after initialization, so skip transform here
+    }
+    setCanvasSize();
+
+    function resize() {
+      setCanvasSize();
     }
     window.addEventListener('resize', resize);
 
     const ctx = canvas.getContext('2d');
+    // Now that ctx is available, set transform for crispness
+    if (ctx) {
+      const dpr = window.devicePixelRatio || 1;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
     if (!ctx) {
       window.removeEventListener('resize', resize);
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
       return;
     }
-    const STAR_COUNT = 48;
+    // Adjust star count and size for mobile
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 600;
+    const STAR_COUNT = isMobile ? 24 : 48;
     const stars = Array.from({ length: STAR_COUNT }).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 1.2 + 0.4,
-      speed: Math.random() * 0.5 + 0.15,
-      drift: Math.random() * 0.3 + 0.1,
+      size: (isMobile ? 0.7 : 1) * (Math.random() * 1.2 + 0.4),
+      speed: (isMobile ? 0.3 : 0.5) * (Math.random() + 0.15),
+      drift: (isMobile ? 0.15 : 0.3) * (Math.random() + 0.1),
       opacity: Math.random() * 0.5 + 0.2,
     }));
 
@@ -66,9 +81,9 @@ export default function Home() {
         if (star.x > width + 8 || star.y > height + 8) {
           star.x = Math.random() * width * 0.7;
           star.y = -8;
-          star.size = Math.random() * 1.2 + 0.4;
-          star.speed = Math.random() * 0.5 + 0.15;
-          star.drift = Math.random() * 0.3 + 0.1;
+          star.size = (isMobile ? 0.7 : 1) * (Math.random() * 1.2 + 0.4);
+          star.speed = (isMobile ? 0.3 : 0.5) * (Math.random() + 0.15);
+          star.drift = (isMobile ? 0.15 : 0.3) * (Math.random() + 0.1);
           star.opacity = Math.random() * 0.5 + 0.2;
         }
       }
@@ -226,84 +241,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-<script dangerouslySetInnerHTML={{
-  __html: `
-    (function() {
-      var skillsSection = null;
-      var contactSection = null;
-      function updateSectionsVisibility() {
-        if (!skillsSection) skillsSection = document.getElementById('skills-section');
-        if (!contactSection) contactSection = document.getElementById('contact-section');
-        var scrollY = window.scrollY || window.pageYOffset;
-        var visible = scrollY > 0;
-        [skillsSection, contactSection].forEach(function(section) {
-          if (!section) return;
-          if (visible) {
-            section.classList.add('section-visible');
-            section.classList.remove('section-hidden');
-          } else {a
-            section.classList.add('section-hidden');
-            section.classList.remove('section-visible');
-          }
-        });
-      }
-      window.addEventListener('scroll', updateSectionsVisibility, { passive: true });
-      window.addEventListener('resize', updateSectionsVisibility, { passive: true });
-      document.addEventListener('DOMContentLoaded', updateSectionsVisibility);
-      setTimeout(updateSectionsVisibility, 1);
-    })();
-  `
-}} />
-
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
