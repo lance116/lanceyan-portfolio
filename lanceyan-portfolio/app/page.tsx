@@ -1,5 +1,4 @@
 "use client";
-// filepath: a:\Website\lanceyan-portfolio\app\page.tsx
 import Image from "next/image";
 import { useEffect } from "react";
 import usePageTransitions from "./hooks/usePageTransitions";
@@ -20,15 +19,12 @@ export default function Home() {
   useEffect(() => {
     // Snowflake background effect
     const canvas = document.createElement('canvas');
-    canvas.id = 'starfall-bg';
-    canvas.style.position = 'fixed';
+    canvas.id = 'starfall-bg';    canvas.style.position = 'fixed';
     canvas.style.top = '0';
     canvas.style.left = '0';
     canvas.style.width = '100vw';
-    canvas.style.height = '100vh';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '0';
-    canvas.style.opacity = '0.18';
+    canvas.style.height = '100vh';    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '0';    canvas.style.opacity = '0.60';
     document.body.appendChild(canvas);
 
     let width = window.innerWidth;
@@ -62,17 +58,15 @@ export default function Home() {
       window.removeEventListener('resize', resize);
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
       return;
-    }
-    // Adjust star count and size for mobile
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 600;
-    const STAR_COUNT = isMobile ? 24 : 48;
+    }    // Adjust star count and size for mobile
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 600;    const STAR_COUNT = isMobile ? 40 : 75;
     const stars = Array.from({ length: STAR_COUNT }).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: (isMobile ? 0.7 : 1) * (Math.random() * 1.2 + 0.4),
-      speed: (isMobile ? 0.3 : 0.5) * (Math.random() + 0.15),
-      drift: (isMobile ? 0.15 : 0.3) * (Math.random() + 0.1),
-      opacity: Math.random() * 0.5 + 0.2,
+      size: (isMobile ? 1.0 : 1.4) * (Math.random() * 1.5 + 0.6),
+      speed: (isMobile ? 0.45 : 0.65) * (Math.random() + 0.25),
+      drift: (isMobile ? 0.25 : 0.4) * (Math.random() + 0.2),
+      opacity: Math.random() * 0.6 + 0.4,
     }));
 
     let running = true;
@@ -81,23 +75,20 @@ export default function Home() {
       ctx.clearRect(0, 0, width, height);
       for (const star of stars) {
         ctx.save();
-        ctx.globalAlpha = star.opacity;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, 2 * Math.PI);
-        ctx.fillStyle = '#fff';
+        ctx.globalAlpha = star.opacity;        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, 2 * Math.PI);        ctx.fillStyle = '#fff';
         ctx.shadowColor = '#fff';
-        ctx.shadowBlur = 4;
+        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.restore();
         star.x += star.drift;
-        star.y += star.speed;
-        if (star.x > width + 8 || star.y > height + 8) {
+        star.y += star.speed;        if (star.x > width + 8 || star.y > height + 8) {
           star.x = Math.random() * width * 0.7;
           star.y = -8;
-          star.size = (isMobile ? 0.7 : 1) * (Math.random() * 1.2 + 0.4);
-          star.speed = (isMobile ? 0.3 : 0.5) * (Math.random() + 0.15);
-          star.drift = (isMobile ? 0.15 : 0.3) * (Math.random() + 0.1);
-          star.opacity = Math.random() * 0.5 + 0.2;
+          star.size = (isMobile ? 0.9 : 1.2) * (Math.random() * 1.4 + 0.5);
+          star.speed = (isMobile ? 0.4 : 0.6) * (Math.random() + 0.2);
+          star.drift = (isMobile ? 0.2 : 0.35) * (Math.random() + 0.15);
+          star.opacity = Math.random() * 0.6 + 0.4;
         }
       }
       requestAnimationFrame(animate);
