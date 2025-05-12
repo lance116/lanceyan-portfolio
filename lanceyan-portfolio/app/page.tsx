@@ -161,7 +161,7 @@ export default function Home() {
                 { src: "/javascript.png", label: "JavaScript", url: "https://www.javascript.com/" },
                 { src: "/css.png", label: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
                 { src: "/html.png", label: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML", bigger: true, moveUp: true, htmlAdjust: true },
-              ].map(({ src, label, url, bigger, moveUp, htmlAdjust }) => (
+              ].map(({ src, label, url, bigger, htmlAdjust }) => (
                 (
                   <a
                     key={label}

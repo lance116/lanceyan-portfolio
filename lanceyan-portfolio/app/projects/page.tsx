@@ -1,12 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import usePageTransitions from "../hooks/usePageTransitions";
 
 export default function ProjectsPage() {
   usePageTransitions();
-  const router = useRouter();
   
   const projects = [
     {      id: 1,
