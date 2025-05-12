@@ -91,8 +91,8 @@ export default function Home() {
         <div className="w-full flex flex-row items-center min-h-[200px] px-4 sm:px-8">
           <div className="flex flex-col justify-center items-start flex-1 pl-0">
             <span className="text-2xl font-bold text-left mb-4">Hi! My name is Lance, and I am an incoming Computer Science student at the University of Waterloo.</span>
-            <span className="text-base text-left mb-2">I love coding and programming, and I'm currently working on creating a chess neural network with PyTorch.</span>
-            <span className="text-base text-left">I'm particularly interested in pursuing a career in Software Engineering and AI.</span>
+            <span className="text-base text-left mb-2">I love coding and programming, and I&apos;m currently working on creating a chess neural network with PyTorch.</span>
+            <span className="text-base text-left">I&apos;m particularly interested in pursuing a career in Software Engineering and AI.</span>
           </div>
           <div className="flex justify-end items-center min-w-[320px] ml-8">
             <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-[320px] flex justify-center items-center">
