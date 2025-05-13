@@ -9,7 +9,7 @@ export default function ProjectsPage() {
       title: "This Website!",
       description: "My personal portfolio website built with Next.js 14, featuring sleek design, interactive elements, and animated transitions. The site showcases responsive layouts, snowflake particle animations, and dynamic content loading. It features clean, modern UI with hover effects and a carefully designed color scheme for optimal user experience.",
       image: "/website.png", // Screenshot of the home page
-      githubUrl: "https://github.com/lance116/lanceyan-portfolio",
+      githubUrl: "https://github.com/lance116/lanceyan-portfolio/tree/main/lanceyan-portfolio",
       skills: [
         { name: "Next.js", imgSrc: "/nextjs.png" },
         { name: "React", imgSrc: "/react.png" },
