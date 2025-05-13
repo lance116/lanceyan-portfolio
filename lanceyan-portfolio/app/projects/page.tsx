@@ -30,7 +30,7 @@ export default function ProjectsPage() {
         { name: "Matplotlib", imgSrc: "/matplotlib.png" }
       ]
     }
-    // You can add more projects here in the future
+    // Add more projects here in the future
   ];
 
   const needsWhiteBg = (name: string) => {
