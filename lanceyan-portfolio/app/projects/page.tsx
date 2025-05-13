@@ -4,8 +4,7 @@ import usePageTransitions from "../hooks/usePageTransitions";
 
 export default function ProjectsPage() {
   usePageTransitions();
-  
-  const projects = [
+    const projects = [
     {      id: 1,
       title: "This Website!",
       description: "My personal portfolio website built with Next.js 14, featuring sleek design, interactive elements, and animated transitions. The site showcases responsive layouts, snowflake particle animations, and dynamic content loading. It features clean, modern UI with hover effects and a carefully designed color scheme for optimal user experience.",
@@ -17,6 +16,18 @@ export default function ProjectsPage() {
         { name: "TypeScript", imgSrc: "/typescript.png" },
         { name: "Tailwind CSS", imgSrc: "/tailwindcss.png" },
         { name: "JavaScript", imgSrc: "/javascript.png" }
+      ]
+    },    {
+      id: 2,
+      title: "Chess Neural Network",
+      description: "Under development. A neural network model designed to analyze and predict chess moves using deep learning techniques. The project incorporates advanced TensorFlow functionality with Python and visualization through Matplotlib.",
+      image: "/pytorch.png", // Using PyTorch logo as a temporary placeholder
+      githubUrl: "https://github.com/lance116/",
+      skills: [
+        { name: "Python", imgSrc: "/python.png" },
+        { name: "TensorFlow", imgSrc: "/tensorflow.png" },
+        { name: "NumPy", imgSrc: "/numpy.png" },
+        { name: "Matplotlib", imgSrc: "/matplotlib.png" }
       ]
     }
     // You can add more projects here in the future
@@ -39,18 +50,16 @@ export default function ProjectsPage() {
                 style={{ transform: 'translateY(8px)' }}></span>
         </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <div 
+          {projects.map((project) => (            <div 
               key={project.id}
-              className="rounded-xl overflow-hidden shadow-lg border border-gray-800/40 bg-black/40 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-1"
-            >              {/* Project Header */}
-              <div className="bg-black/80 p-6">
-                <div className="flex flex-col gap-5">
-                  <div className="flex-1">
+              className="rounded-xl overflow-hidden shadow-lg border border-gray-800/40 bg-black/40 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-1 flex flex-col"
+            >{/* Project Header */}              <div className="bg-black/80 p-6 flex-1">
+                <div className="flex flex-col h-full">
+                  <div className="flex-1 min-h-[100px]">
                     <h2 className="text-2xl font-bold text-white drop-shadow-lg mb-3">
                       {project.title}
                     </h2>
-                    <p className="text-white/90 text-sm leading-relaxed">
+                    <p className="text-white/90 text-sm leading-relaxed mb-5">
                       {project.description}
                     </p>
                   </div>
@@ -64,16 +73,19 @@ export default function ProjectsPage() {
                   </div>
                 </div>
               </div>
-                {/* Project Technologies */}              <div className="relative bg-gradient-to-b from-black to-black/80 py-4 px-6 z-10">                <h3 className="text-base font-medium text-white mb-4">Built with:</h3>
-                <div className="flex flex-wrap gap-8 mb-6">
-                  {project.skills.map((skill, index) => (                    <div key={index} className="flex flex-col items-center group">                      <div className="flex justify-center items-center h-[50px]">
+                {/* Project Technologies */}              <div className="relative bg-gradient-to-b from-black to-black/80 py-4 px-6 z-10 flex flex-col">                <h3 className="text-base font-medium text-white mb-4">Built with:</h3>                <div className="flex flex-wrap gap-8 mb-6 justify-center sm:justify-start">
+                  {project.skills.map((skill, index) => (
+                    <div key={index} className="flex flex-col items-center group">
+                      <div className="flex justify-center items-center h-[50px]">
                         <div className={`
                           ${needsWhiteBg(skill.name) ? "bg-white p-1 rounded-md" : 
                             needsCircularWhiteBg(skill.name) ? "bg-white p-1 rounded-full flex items-center justify-center" : 
                             ""}
-                        `} style={needsCircularWhiteBg(skill.name) ? { width: "32px", height: "32px" } : undefined}>                          <Image
+                        `} style={needsCircularWhiteBg(skill.name) ? { width: "32px", height: "32px" } : undefined}>
+                          <Image
                             src={skill.imgSrc}
-                            alt={skill.name}                            width={skill.name === "Next.js" ? 36 : 30}
+                            alt={skill.name}
+                            width={skill.name === "Next.js" ? 36 : 30}
                             height={skill.name === "Next.js" ? 36 : 30}
                             className="transition-transform duration-200 group-hover:scale-125"
                             style={skill.name === "Next.js" ? { marginTop: '0.25px' } : undefined}
