@@ -43,9 +43,25 @@ export default function RootLayout({
             <Link href="/projects" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</Link>
             <Link href="/experience" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</Link>
             <Link href="/resume" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Resume</Link>
-          </div>
-        </nav>
+          </div>        </nav>
         <div style={{ paddingTop: 56 }}>{children}</div>
+        
+        {/* Footer section - added to layout so it appears on all pages */}
+        <footer className="w-full bg-black text-white text-center text-sm py-6 z-10">
+          <div className="mb-3">
+            Built with{" "}
+            <span className="text-blue-400 font-medium mx-1">React</span>•
+            <span className="text-green-400 font-medium mx-1">Next.js</span>•
+            <span className="text-cyan-400 font-medium mx-1">TypeScript</span>•
+            <span className="text-yellow-400 font-medium mx-1">JavaScript</span>•
+            <span className="text-pink-400 font-medium mx-1">HTML</span>•
+            <span className="text-purple-400 font-medium mx-1">CSS</span>•
+            <span className="text-sky-400 font-medium mx-1">Tailwind CSS</span>
+          </div>
+          <div>
+            Copyright © 2025 Lance Yan All rights reserved
+          </div>
+        </footer>
       </body>
     </html>
   );
