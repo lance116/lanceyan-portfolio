@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
 import usePageTransitions from "./hooks/usePageTransitions";
 import useSnowflakeEffect from "./hooks/useSnowflakeEffect";
 
