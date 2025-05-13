@@ -17,6 +17,8 @@ export default function usePageTransitions() {
     
     /**
      * Updates section visibility based on scroll position
+     * - At top (scrollY === 0): sections are hidden
+     * - When scrolled (scrollY > 0): sections are visible
      */
     const updateSectionsByScrollPosition = () => {
       const sections = getSections();

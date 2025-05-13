@@ -6,17 +6,19 @@ import { useEffect } from 'react';
  * Custom hook to handle section transitions
  * Based on scroll position: hidden at top, visible when scrolled
  */
-export default function usePageTransitions() {
+export default function usePageTransitions(): void {
   useEffect(() => {
     // Get the sections we need to animate
-    const getSections = () => {
+    const getSections = (): HTMLElement[] => {
       const skillsSection = document.getElementById('skills-section');
       const contactSection = document.getElementById('contact-section');
-      return [skillsSection, contactSection].filter(Boolean);
+      return [skillsSection, contactSection].filter((section): section is HTMLElement => section !== null);
     };
     
     /**
      * Updates section visibility based on scroll position
+     * - At top (scrollY === 0): sections are hidden
+     * - When scrolled (scrollY > 0): sections are visible
      */
     const updateSectionsByScrollPosition = () => {
       const sections = getSections();
