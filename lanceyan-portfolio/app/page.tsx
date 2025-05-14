@@ -121,53 +121,38 @@ export default function Home() {
                 { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/", bigger: false },
                 { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/", bigger: false },
               ].map(({ src, label, url, moveUp, bigger, moveUpMore, moveUpMost }) => (
-                label === "CSS" || label === "HTML" ? (
-                  <div key={label} className="flex flex-col items-center min-w-[110px]">
-                    <div className="flex flex-col items-center justify-end h-[80px]">
+                <a
+                  key={label}
+                  href={url}
+                  className="flex flex-col items-center min-w-[110px] group"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="flex flex-col items-center justify-end h-[80px] relative">
+                    <div
+                      className={
+                        `${needsWhiteBg(label) ? 'bg-white p-1 rounded-md' : needsCircularWhiteBg(label) ? 'bg-white p-1 rounded-full flex items-center justify-center' : ''}`
+                      }
+                      style={needsCircularWhiteBg(label) ? { width: '44px', height: '44px', marginTop: '5px' } : undefined}
+                    >
                       <Image
                         src={src}
                         alt={label}
-                        width={label === "HTML" && bigger ? 74 : label === "HTML" ? 64 : 48}
-                        height={label === "HTML" && bigger ? 74 : label === "HTML" ? 64 : 48}
-                        className="mb-1"
-                        style={moveUp ? { marginTop: '-12px' } : undefined}
+                        width={label === 'Tailwind CSS' && moveUp ? 48 : label === 'Next.js' ? 52 : 48}
+                        height={label === 'Tailwind CSS' && moveUp ? 48 : label === 'Next.js' ? 52 : 48}
+                        className="mb-1 transition-transform duration-200 group-hover:scale-125"
+                        style={
+                          label === 'Next.js' ? { marginTop: '3.5px' } :
+                          label === 'Tailwind CSS' && moveUpMost ? { marginTop: '-32px' } :
+                          label === 'Tailwind CSS' && moveUpMore ? { marginTop: '-24px' } :
+                          label === 'Tailwind CSS' && moveUp ? { marginTop: '-12px' } :
+                          undefined
+                        }
                       />
-                    </div>                    
-                    <span className="text-sm text-center mt-1 min-h-[20px]">{label}</span>
-                  </div>
-                ) : (
-                  <a
-                    key={label}
-                    href={url}
-                    className="flex flex-col items-center min-w-[110px] group"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >                    
-                    <div className="flex flex-col items-center justify-end h-[80px]">                      
-                      <div className={
-                        needsWhiteBg(label) ? "bg-white p-1 rounded-md" : 
-                        needsCircularWhiteBg(label) ? "bg-white p-1 rounded-full flex items-center justify-center" : 
-                        ""
-                      } style={needsCircularWhiteBg(label) ? { width: "44px", height: "44px", marginTop: "5px" } : undefined}>                        
-                        <Image
-                          src={src}
-                          alt={label}
-                          width={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : 48}
-                          height={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : 48}
-                          className="mb-1 transition-transform duration-200 group-hover:scale-125"                          
-                          style={
-                            label === "Next.js" ? { marginTop: '3.5px' } :
-                            label === "Tailwind CSS" && moveUpMost ? { marginTop: '-32px' } : 
-                            label === "Tailwind CSS" && moveUpMore ? { marginTop: '-24px' } : 
-                            label === "Tailwind CSS" && moveUp ? { marginTop: '-12px' } : 
-                            undefined
-                          }
-                        />
-                      </div>
                     </div>
-                    <span className="text-sm text-center mt-2 min-h-[20px]">{label}</span>
-                  </a>
-                )
+                  </div>
+                  <span className="text-sm text-center mt-2 min-h-[20px] transition-colors duration-300">{label}</span>
+                </a>
               ))}
             </div>
           </div>

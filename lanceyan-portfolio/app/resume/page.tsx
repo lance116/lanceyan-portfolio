@@ -1,29 +1,7 @@
 "use client";
-import { useEffect } from 'react';
 
 export default function ResumePage() {
-  // This function runs on the client side to ensure proper PDF display
-  useEffect(() => {
-    // Hide any elements from the root layout that might appear
-    const nav = document.querySelector('nav');
-    if (nav) nav.style.display = 'none';
-    
-    const footer = document.querySelector('footer');
-    if (footer) footer.style.display = 'none';
-    
-    // Set body styles directly
-    document.body.style.margin = '0';
-    document.body.style.padding = '0';
-    document.body.style.backgroundColor = 'black';
-    document.body.style.overflow = 'hidden';
-    
-    // Cleanup function
-    return () => {
-      if (nav) nav.style.display = '';
-      if (footer) footer.style.display = '';
-      document.body.style.overflow = '';
-    };
-  }, []);  return (
+  return (
     <div style={{ 
       position: 'fixed', 
       top: 0, 
