@@ -91,15 +91,14 @@ export default function Home() {
                     href={url}
                     className="flex flex-col items-center min-w-[110px] group"
                     target="_blank"
-                    rel="noopener noreferrer"
-                  >                    <div className="flex flex-col items-center justify-end h-[64px]">                      <div className={needsWhiteBg(label) ? label === "HTML" ? "bg-white p-[0.525rem] rounded-md" : "bg-white p-1 rounded-md" : ""}>
+                    rel="noopener noreferrer"                  >                    <div className="flex flex-col items-center justify-end h-[64px]">                      <div className={needsWhiteBg(label) ? label === "HTML" ? "bg-white p-[0.27rem] rounded-md" : "bg-white p-1 rounded-md" : ""}>
                         <Image
                           src={src}
                           alt={label}
                           width={label === "HTML" && htmlAdjust ? 43.03 : bigger ? 48 : 40}
                           height={label === "HTML" && htmlAdjust ? 43.03 : bigger ? 48 : 40}
                           className="mb-0 transition-transform duration-200 group-hover:scale-125"
-                          style={label === "HTML" && htmlAdjust ? { marginLeft: "3px" } : bigger ? { marginLeft: "8px" } : undefined}
+                          style={label === "HTML" && htmlAdjust ? { marginLeft: "1px" } : bigger ? { marginLeft: "8px" } : undefined}
                         />
                       </div>
                     </div>
