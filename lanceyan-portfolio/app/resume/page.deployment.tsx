@@ -2,16 +2,16 @@
 import { useEffect } from 'react';
 
 export default function ResumePage() {
-  // This function runs on the client side to ensure proper PDF display
+  // This function runs after page mount to modify the DOM directly
   useEffect(() => {
-    // Hide any elements from the root layout that might appear
+    // Remove any potential elements from the root layout
     const nav = document.querySelector('nav');
     if (nav) nav.style.display = 'none';
     
     const footer = document.querySelector('footer');
     if (footer) footer.style.display = 'none';
     
-    // Set body styles directly
+    // Set background and body styles
     document.body.style.margin = '0';
     document.body.style.padding = '0';
     document.body.style.backgroundColor = 'black';
@@ -24,28 +24,18 @@ export default function ResumePage() {
       document.body.style.overflow = '';
     };
   }, []);  return (
-    <div style={{ 
-      position: 'fixed', 
-      top: 0, 
-      left: 0, 
-      width: '100%', 
-      height: '100%', 
-      backgroundColor: 'black',
-      margin: 0,
-      padding: 0,
-      zIndex: 9999
-    }}>
-      <object
-        data="/LanceResume.pdf"
-        type="application/pdf"
-        style={{ 
-          width: '100%', 
-          height: '100%', 
-          border: 'none',
-          margin: 0,
-          padding: 0
-        }}
-      />
-    </div>
+    <object
+      data="/LanceResume.pdf"
+      type="application/pdf"
+      className="w-full h-screen"
+      style={{ 
+        margin: 0, 
+        padding: 0,
+        border: 'none',
+        position: 'absolute',
+        top: 0,
+        left: 0
+      }}
+    />
   );
 }

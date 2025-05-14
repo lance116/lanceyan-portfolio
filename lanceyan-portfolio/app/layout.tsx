@@ -43,10 +43,9 @@ export default function RootLayout({
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l9-9 9 9M4.5 10.5V21h15V10.5" />
               </svg>
-            </Link>
-            <Link href="/projects" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</Link>
+            </Link>            <Link href="/projects" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</Link>
             <Link href="/experience" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</Link>
-            <Link href="/resume" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Resume</Link>
+            <a href="/resume" target="_blank" rel="noopener noreferrer" className="text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Resume</a>
           </div>        </nav>
         <div style={{ paddingTop: 56 }}>{children}</div>
           {/* Footer section - added to layout so it appears on all pages */}

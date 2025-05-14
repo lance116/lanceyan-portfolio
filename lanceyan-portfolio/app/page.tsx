@@ -92,7 +92,7 @@ export default function Home() {
                     className="flex flex-col items-center min-w-[110px] group"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >                    <div className="flex flex-col items-center justify-end h-[64px]">                      <div className={needsWhiteBg(label) ? label === "HTML" ? "bg-white p-0.5 rounded-md" : "bg-white p-1 rounded-md" : ""}>
+                  >                    <div className="flex flex-col items-center justify-end h-[64px]">                      <div className={needsWhiteBg(label) ? label === "HTML" ? "bg-white p-[0.525rem] rounded-md" : "bg-white p-1 rounded-md" : ""}>
                         <Image
                           src={src}
                           alt={label}
@@ -113,14 +113,14 @@ export default function Home() {
           {/* Frameworks Row */}          
           <div>
             <h3 className="text-lg font-medium mb-2 text-center sm:text-left">Frameworks & Libraries</h3>
-            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">              {[
+            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
+              {[
                 { src: "/react.png", label: "React", url: "https://react.dev/", bigger: false },
                 { src: "/nextjs.png", label: "Next.js", url: "https://nextjs.org/", bigger: false },
                 { src: "/tailwindcss.png", label: "Tailwind CSS", url: "https://tailwindcss.com/", moveUp: true, moveUpMore: true, moveUpMost: true, bigger: false },
                 { src: "/pytorch.png", label: "PyTorch", url: "https://pytorch.org/", bigger: false },
                 { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/", bigger: false },
                 { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/", bigger: false },
-                { src: "/matplotlib.png", label: "Matplotlib", url: "https://matplotlib.org/", bigger: false },
               ].map(({ src, label, url, moveUp, bigger, moveUpMore, moveUpMost }) => (
                 label === "CSS" || label === "HTML" ? (
                   <div key={label} className="flex flex-col items-center min-w-[110px]">
@@ -149,11 +149,12 @@ export default function Home() {
                         needsWhiteBg(label) ? "bg-white p-1 rounded-md" : 
                         needsCircularWhiteBg(label) ? "bg-white p-1 rounded-full flex items-center justify-center" : 
                         ""
-                      } style={needsCircularWhiteBg(label) ? { width: "44px", height: "44px", marginTop: "5px" } : undefined}>                          <Image
+                      } style={needsCircularWhiteBg(label) ? { width: "44px", height: "44px", marginTop: "5px" } : undefined}>                        
+                        <Image
                           src={src}
                           alt={label}
-                          width={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : label === "Matplotlib" ? 44.6 : 48}
-                          height={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : label === "Matplotlib" ? 44.6 : 48}
+                          width={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : 48}
+                          height={label === "Tailwind CSS" && moveUp ? 48 : label === "Next.js" ? 52 : 48}
                           className="mb-1 transition-transform duration-200 group-hover:scale-125"                          
                           style={
                             label === "Next.js" ? { marginTop: '3.5px' } :
