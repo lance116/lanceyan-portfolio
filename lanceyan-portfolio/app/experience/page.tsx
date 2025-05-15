@@ -1,5 +1,12 @@
 "use client";
 
+import React from 'react'; // Import React for CSSProperties
+
+interface ExperienceCSSProperties extends React.CSSProperties {
+  '--glow-color-hex'?: string;
+  '--glow-color-rgb'?: string;
+}
+
 export default function ExperiencePage() {
   const experiences = [
     {
@@ -64,7 +71,7 @@ export default function ExperiencePage() {
                   style={{
                     '--glow-color-hex': exp.color === 'blue' ? '#3B82F6' : exp.color === 'green' ? '#10B981' : '#8B5CF6',
                     '--glow-color-rgb': exp.color === 'blue' ? '59, 130, 246' : exp.color === 'green' ? '16, 185, 129' : '139, 92, 246'
-                  } as any}
+                  } as ExperienceCSSProperties}
                 >                  <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
                     <h3 className={`text-xl font-bold text-white experience-title`}>{exp.title}</h3>
                     <span className="text-gray-300 text-sm mt-1 sm:mt-0">{exp.date}</span>

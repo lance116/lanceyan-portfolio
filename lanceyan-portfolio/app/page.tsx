@@ -120,7 +120,7 @@ export default function Home() {
                 { src: "/pytorch.png", label: "PyTorch", url: "https://pytorch.org/", bigger: false },
                 { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/", bigger: false },
                 { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/", bigger: false },
-              ].map(({ src, label, url, moveUp, bigger, moveUpMore, moveUpMost }) => (
+              ].map(({ src, label, url, moveUp, moveUpMore, moveUpMost }) => (
                 <a
                   key={label}
                   href={url}
