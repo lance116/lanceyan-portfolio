@@ -2,13 +2,31 @@
 import Image from "next/image";
 import usePageTransitions from "./hooks/usePageTransitions";
 import useSnowflakeEffect from "./hooks/useSnowflakeEffect";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  // State to track if device is mobile
+  const [isMobile, setIsMobile] = useState(false);
+  
   // Use our custom hook to handle page transitions
   usePageTransitions();
   
   // Use snowflake effect hook for the background
   useSnowflakeEffect();
+  
+  // Detect mobile devices
+  useEffect(() => {
+    const checkDevice = () => {
+      const userAgent = navigator.userAgent;
+      const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(userAgent);
+      setIsMobile(isMobileDevice);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
   
   // Helper function to determine if logo needs white background
   const needsWhiteBg = (label: string) => {
@@ -25,13 +43,18 @@ export default function Home() {
 
 
       <main className="flex flex-col gap-2 row-start-2 items-center sm:items-start w-full max-w-4.5xl pt-[56px] px-8 pb-32 sm:px-8">
-        <div className="w-full flex flex-row items-center min-h-[200px] px-4 sm:px-8">
-          <div className="flex flex-col justify-center items-start flex-1 pl-0">
-            <span className="text-2xl font-bold text-left mb-4">Hi! My name is Lance, and I am an incoming Computer Science student at the University of Waterloo.</span>
-            <span className="text-base text-left mb-2">I love coding and programming, and I&apos;m currently working on creating a chess neural network with PyTorch.</span>
-            <span className="text-base text-left">I&apos;m particularly interested in pursuing a career in Software Engineering and AI.</span>
-          </div>
-          <div className="flex justify-end items-center min-w-[320px] ml-8">
+        <div className={`w-full flex ${isMobile ? 'flex-col' : 'flex-row'} items-center min-h-[200px] px-4 sm:px-8`}>
+          <div className={`flex flex-col justify-center items-start flex-1 pl-0 ${isMobile ? 'mb-6' : ''}`}>
+            <span className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-left mb-4`}>
+              Hi! My name is Lance, and I am an incoming Computer Science student at the University of Waterloo.
+            </span>
+            <span className="text-base text-left mb-2">
+              I love coding and programming, and I&apos;m currently working on creating a chess neural network with PyTorch.
+            </span>
+            <span className="text-base text-left">
+              I&apos;m particularly interested in pursuing a career in Software Engineering and AI.
+            </span>
+          </div>          <div className={`flex ${isMobile ? 'justify-center' : 'justify-end'} items-center ${isMobile ? 'w-full' : 'min-w-[320px] ml-8'}`}>
             <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-[320px] flex justify-center items-center">
               <Image src="/waterloo.png" alt="University of Waterloo" width={300} height={300} className="object-contain" priority />
             </div>
