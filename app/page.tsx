@@ -135,14 +135,14 @@ export default function Home() {
           {/* Frameworks Row */}          
           <div>
             <h3 className="text-lg font-medium mb-2 text-center sm:text-left">Frameworks & Libraries</h3>
-            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
-              {[
+            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">              {[
                 { src: "/react.png", label: "React", url: "https://react.dev/", bigger: false },
                 { src: "/nextjs.png", label: "Next.js", url: "https://nextjs.org/", bigger: false },
                 { src: "/tailwindcss.png", label: "Tailwind CSS", url: "https://tailwindcss.com/", moveUp: true, moveUpMore: true, moveUpMost: true, bigger: false },
                 { src: "/pytorch.png", label: "PyTorch", url: "https://pytorch.org/", bigger: false },
                 { src: "/tensorflow.png", label: "TensorFlow", url: "https://www.tensorflow.org/", bigger: false },
                 { src: "/numpy.png", label: "NumPy", url: "https://numpy.org/", bigger: false },
+                { src: "/matplotlib.png", label: "Matplotlib", url: "https://matplotlib.org/", bigger: false },
               ].map(({ src, label, url, moveUp, moveUpMore, moveUpMost }) => (
                 <a
                   key={label}
