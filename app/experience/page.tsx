@@ -17,7 +17,7 @@ export default function ExperiencePage() {
       details: [
         "Led development of ThermoGen, an energy recovery system reducing residential bills by 60%.",
         "Integrated thermodynamic principles to generate 269,440 kWh from HVAC waste heat.",
-        "Collaborated with professors from multiple universities on energy innovation design."
+        "Collaborated with professors from Yale, UofT and TMU on energy innovation design."
       ],
       color: "blue"
     },
