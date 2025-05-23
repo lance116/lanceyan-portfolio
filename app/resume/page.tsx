@@ -52,7 +52,7 @@ export default function ResumePage() {
             View Resume
           </a>
           <p style={{ color: 'white', marginTop: '18px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            (Opens in a new tab using your device's PDF viewer)
+            (Opens in a new tab using your device&apos;s PDF viewer)
           </p>
         </div>
       ) : (
