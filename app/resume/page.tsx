@@ -2,19 +2,12 @@
 import { useEffect, useState } from 'react';
 
 export default function ResumePage() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
   
   useEffect(() => {
-    // Check if the user is on a mobile device (iOS/iPhone)
-    const checkDevice = () => {
-      const userAgent = navigator.userAgent;
-      setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
-    };
-    
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-    
-    return () => window.removeEventListener('resize', checkDevice);
+    // Check if the user is on an iOS device (iPhone, iPad, iPod)
+    const userAgent = navigator.userAgent;
+    setIsIOS(/iPhone|iPad|iPod/i.test(userAgent));
   }, []);
 
   return (
@@ -31,51 +24,38 @@ export default function ResumePage() {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {isMobile && (
+      {isIOS ? (
         <div style={{
-          position: 'absolute',
-          top: '10px',
-          left: '0',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
           width: '100%',
-          textAlign: 'center',
-          zIndex: 10000,
-          padding: '10px',
         }}>
-          <a 
-            href="/ResumeV2.pdf" 
-            download="LanceYan_Resume.pdf"
+          <a
+            href="/ResumeV2.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               backgroundColor: '#3B82F6',
               color: 'white',
-              padding: '12px 20px',
-              borderRadius: '8px',
+              padding: '16px 28px',
+              borderRadius: '10px',
               textDecoration: 'none',
               fontWeight: 'bold',
-              display: 'inline-block',
+              fontSize: '1.2rem',
               fontFamily: 'system-ui, -apple-system, sans-serif',
+              marginTop: '20px',
             }}
           >
-            Download Resume
+            View Resume
           </a>
+          <p style={{ color: 'white', marginTop: '18px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            (Opens in a new tab using your device's PDF viewer)
+          </p>
         </div>
-      )}
-      
-      {/* On mobile: use iframe with fallback to direct link */}
-      {isMobile ? (
-        <iframe
-          src="/ResumeV2.pdf"
-          style={{ 
-            width: '100%', 
-            height: '100%', 
-            border: 'none',
-            margin: 0,
-            padding: 0,
-            marginTop: '50px' // Space for the download button
-          }}
-          title="Lance Yan's Resume"
-        />
       ) : (
-        /* On desktop: keep using object tag for better PDF experience */
         <object
           data="/ResumeV2.pdf"
           type="application/pdf"
