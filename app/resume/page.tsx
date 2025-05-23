@@ -42,7 +42,7 @@ export default function ResumePage() {
           padding: '10px',
         }}>
           <a 
-            href="/LanceResume.pdf" 
+            href="/ResumeV1.pdf" 
             download="LanceYan_Resume.pdf"
             style={{
               backgroundColor: '#3B82F6',
@@ -63,7 +63,7 @@ export default function ResumePage() {
       {/* On mobile: use iframe with fallback to direct link */}
       {isMobile ? (
         <iframe
-          src="/LanceResume.pdf"
+          src="/ResumeV1.pdf"
           style={{ 
             width: '100%', 
             height: '100%', 
@@ -77,7 +77,7 @@ export default function ResumePage() {
       ) : (
         /* On desktop: keep using object tag for better PDF experience */
         <object
-          data="/LanceResume.pdf"
+          data="/ResumeV1.pdf"
           type="application/pdf"
           style={{ 
             width: '100%', 
@@ -88,7 +88,7 @@ export default function ResumePage() {
           }}
         >
           <p style={{ color: 'white', textAlign: 'center', marginTop: '20px' }}>
-            Unable to display PDF. <a href="/LanceResume.pdf" style={{ color: '#3B82F6' }}>Download instead</a>
+            Unable to display PDF. <a href="/ResumeV1.pdf" style={{ color: '#3B82F6' }}>Download instead</a>
           </p>
         </object>
       )}

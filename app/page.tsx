@@ -49,10 +49,10 @@ export default function Home() {
               Hi! My name is Lance, and I am an incoming Computer Science student at the University of Waterloo.
             </span>
             <span className="text-base text-left mb-2">
-              I love coding and programming, and I&apos;m currently working on creating a chess neural network with PyTorch.
+              I love coding and programming, and I&apos;m currently working on creating a chess neural network with TensorFlow/Keras.
             </span>
             <span className="text-base text-left">
-              I&apos;m particularly interested in pursuing a career in Software Engineering and AI.
+              I&apos;m particularly interested in pursuing a career in Software Engineering, Quantitative Research or AI.
             </span>
           </div>          <div className={`flex ${isMobile ? 'justify-center' : 'justify-end'} items-center ${isMobile ? 'w-full' : 'min-w-[320px] ml-8'}`}>
             <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-[320px] flex justify-center items-center">
