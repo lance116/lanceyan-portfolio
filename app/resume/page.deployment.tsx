@@ -25,7 +25,7 @@ export default function ResumePage() {
     };
   }, []);  return (
     <object
-      data="/LanceResume.pdf"
+      data="/ResumeV2.pdf"
       type="application/pdf"
       className="w-full h-screen"
       style={{ 
