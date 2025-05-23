@@ -52,7 +52,7 @@ export default function Home() {
               I love coding and programming, and I&apos;m currently working on creating a chess neural network with TensorFlow/Keras.
             </span>
             <span className="text-base text-left">
-              I&apos;m particularly interested in pursuing a career in Software Engineering, Quantitative Research or AI.
+              I&apos;m particularly interested in pursuing a career in Software Engineering, Quantitative Development or AI.
             </span>
           </div>          <div className={`flex ${isMobile ? 'justify-center' : 'justify-end'} items-center ${isMobile ? 'w-full' : 'min-w-[320px] ml-8'}`}>
             <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-[320px] flex justify-center items-center">
