@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       id: 2,
       title: "Chess Neural Network",
       description: "Under development. A neural network model designed to analyze and predict chess moves using deep learning techniques. The project incorporates advanced TensorFlow functionality with Python and visualization through Matplotlib.",
-      image: "/pytorch.png", // Using PyTorch logo as a temporary placeholder
+      image: "/tensorflow.png", // Using TensorFlow logo for the chess neural network project
       githubUrl: "https://github.com/lance116/",
       skills: [
         { name: "Python", imgSrc: "/python.png" },
